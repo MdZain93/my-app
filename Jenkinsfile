@@ -7,10 +7,9 @@ pipeline {
     }
 
     stages {
-
         stage('Checkout') {
             steps {
-                git branch: 'master', url:'https://github.com/MdZain93/my-app.git',
+                git branch: 'master', url:'https://github.com/Keerthana-Keeru/demo-app2.git',
                 credentialsId: 'github-token'
             }
         }
@@ -31,13 +30,30 @@ pipeline {
             steps {
                 sh 'mvn package'
             }
-        
-        
         }
+
         stage('Run Application') {
             steps {
                 sh 'mvn exec:java -Dexec.mainClass="com.example.app.App"'
             }
         }
-    }
-}
+    } // End of stages
+
+    post {
+        success {
+            emailext (
+                subject: "SUCCESS: ${JOB_NAME} #${BUILD_NUMBER}",
+                body: "Build succeeded!\nCheck: ${BUILD_URL}",
+                to: "keerthanakeeru092005@gmail.com"
+            )
+        }
+
+        failure {
+            emailext (
+                subject: "FAILED: ${JOB_NAME} #${BUILD_NUMBER}",
+                body: "Build failed!\nCheck: ${BUILD_URL}",
+                to: "keerthanakeeru092005@gmail.com"
+            )
+        }
+    } // End of post
+} // End of pipeline (This was missing or misplaced in your original)
