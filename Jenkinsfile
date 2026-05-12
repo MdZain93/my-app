@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url:'https://github.com/Keerthana-Keeru/demo-app2.git',
+                git branch: 'master', url:'https://github.com/MdZain93/my-app.git',
                 credentialsId: 'github-token'
             }
         }
@@ -44,7 +44,7 @@ pipeline {
             emailext (
                 subject: "SUCCESS: ${JOB_NAME} #${BUILD_NUMBER}",
                 body: "Build succeeded!\nCheck: ${BUILD_URL}",
-                to: "keerthanakeeru092005@gmail.com"
+                to: "mohammedzainjofficial@gmail.com"
             )
         }
 
@@ -52,7 +52,7 @@ pipeline {
             emailext (
                 subject: "FAILED: ${JOB_NAME} #${BUILD_NUMBER}",
                 body: "Build failed!\nCheck: ${BUILD_URL}",
-                to: "keerthanakeeru092005@gmail.com"
+                to: "mohammedzainjofficial@gmail.com"
             )
         }
     } // End of post
